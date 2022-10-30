@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html><head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="jquery-3.6.0.min.js" type="text/javascript"></script>
+
+
+<style>
+
+canvas
+ {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+	position:absolute;
+	
+ }
+
+</style>
+
+
+<canvas id="canvas" width="319" height="361" style="position:absolute; opacity:30%"></canvas>
+</head>
+<img id="myImg" src="../imagenes/etapa-11.gif" alt="The Pulpit Rock" width="319" height="361" class="fixed" style="position:relative; opacity:100%">
+
+<body onload="startGame()">
+
+<script>
+
+
+
+function customizePath(path, func) {
+    var pathElement = document.createElementNS('http://www.w3.org/2000/svg',"path"); 
+    pathElement.setAttributeNS(null, 'd', path);
+      const length = pathElement.getTotalLength();
+    const duration = 8000; 
+    const interval = length / duration;
+    var time = 0, step = 0; 
+  
+      const timer = setInterval(function() {
+        if (time <= duration) {
+              this.path.x = parseInt(pathElement.getPointAtLength(step).x);
+              this.path.y = parseInt(pathElement.getPointAtLength(step).y);
+              func(path.x, path.y);
+              step++;
+        } else {
+              clearInterval(timer)
+        }
+     }, interval);
+}
+
+var path = 'M10,349 C9,123.90861 135.90861,139 120,139 C100.9169,169 110,133.90861 138,316 C298,298.109139 55.90861,312 318,22 C50.0939,62 40,72 60,76 C0,0 8,0 60,20 C308,4 6,4 6,6 C156,72 105.90861,92 128,42 C154,93 168,78 168,6 C68,33.90861 185.90861,6 208,16 C230.09139,16 248,33.90861 248,6 C248,18.09139 230.09139,6 208,16 L48,6 C25.90861,6 8,78.09139 319,56 Z';
+
+this.context = this.canvas.getContext('2d');
+function move(x, y) {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      context.beginPath();
+      context.arc(this.x, this.y, 25, 0, Math.PI*2, true);
+      context.fillStyle = '#f0f';
+      context.fill();
+      context.closePath();
+}
+customizePath(path, move);
+
+
+
+
+
+
+var myGamePiece;
+var path;
+
+
+
+
+var myObstacle;
+var myObstacle2;
+var myObstacle1;
+var myObstacle3;
+var myObstacle4;
+var myObstacle7;
+var myObstacle8;
+var myObstacle9;
+
+
+
+
+
+
+
+
+
+function startGame() {
+   myGamePiece = new component(30, 30, "../imagenes/1.png", 40, 200, "image");
+    myObstacle  = new component(10, 200, "green", 0, 100);    	    	    	    myObstacle2  = new component(65, 120, "blue", 80, 180);
+	myObstacle1  = new component(40, 160, "black", 210, 130);
+	myObstacle3  = new component(250, 15, "orange", 0, 110);
+	myObstacle4 = new component(260, 15, "yellow", 60, 30);
+	 myObstacle7  = new component(15, 45, "purple", 300, 0);
+	 myObstacle8  = new component(260, 15, "cyan", 60, 30);
+	   myObstacle9  = new component(40, 170, "red", 210, 100);
+	
+	
+	path = new component(70, 70, "red", 150, 90);
+	
+	
+
+	
+
+	
+	
+	    
+    myGameArea.start();
+	
+	
+}
+
+var myGameArea = {
+	
+	
+
+	
+   canvas :document.createElement("canvas"),
+   
+   
+    start : function() {
+        this.canvas.width = 319;
+        this.canvas.height = 361;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+		this.frameNo = 0; 
+		
+   
+        
+	
+    
+        this.interval = setInterval(updateGameArea, 20);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+}
+
+
+	
+	
+
+function component(width, height, color, x, y, type) {
+	this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+	}
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+		
+		
+	
+		 ctx = myGameArea.context;
+        if (type == "image") {
+			
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+				
+				
+        } else {
+		
+					
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+		
+		
+		}
+	
+	}
+	
+
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }    
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x +(this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+
+
+  
+   if (myGamePiece.crashWith(myObstacle1)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle1.x += 1;   
+		myObstacle1.update();
+        myGamePiece.newPos();    
+        myGamePiece.update();
+    }
+	
+
+	if (myGamePiece.crashWith(myObstacle)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	if (myGamePiece.crashWith(myObstacle2)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle2.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	if (myGamePiece.crashWith(myObstacle3)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle3.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	if (myGamePiece.crashWith(myObstacle4)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle4.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	
+	if (myGamePiece.crashWith(myObstacle7)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "stage 12.html";
+    } else {
+        myGameArea.clear();
+        myObstacle7.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	if (myGamePiece.crashWith(myObstacle8)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle8.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	
+	if (myGamePiece.crashWith(myObstacle9)) {
+		
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle9.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+		 if (myGamePiece.crashWith(path)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad dificil.html";
+		
+    } else {
+        myGameArea.clear();
+        path.update();
+		
+		
+		path.newPos();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	
+}
+
+
+
+	  
+
+  myGameArea.clear();
+  myGameArea.frameNo += 1;
+  
+
+
+  
+ 
+ 
+
+
+ myGamePiece.newPos();
+ myGamePiece.update();
+
+
+
+
+   
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+
+
+
+
+
+</script> 
+
+
+ 
+
+<div style="text-align:center;width:480px;">
+  <button onmousedown="moveup()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveup()">UP</button><br><br>
+  <button onmousedown="moveleft()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveleft()">LEFT</button>
+  <button onmousedown="moveright()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveright()">RIGHT</button><br><br> 
+  <button onmousedown="movedown()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="movedown()">DOWN</button>
+</div>
+
+</body>
+
+</html>
