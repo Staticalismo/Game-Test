@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+	position:absolute;
+}
+</style>
+</head>
+<body onload="startGame()">
+<img id="myImg" src="../imagenes/etapa-12.gif" alt="The Pulpit Rock" width="319" height="361" style="position:relative; opacity:100%">
+
+
+<style>
+#myImg {
+    -webkit-animation-name: steam;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-name: steam;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+}
+@-webkit-keyframes steam {
+    0%, 100% {
+        -webkit-transform: skewX(10deg);
+        opacity: 1;        
+    }
+    25% { -webkit-transform: skewX(10deg); opacity: .8; }
+    75% { -webkit-transform: skewX(-10deg); opacity: .8; }
+}
+@keyframes steam {
+    0%, 100% {
+        transform: skewX(2deg);
+        opacity: 1;        
+    }
+    25% { transform: skewX(2deg); opacity: .8; }
+    75% { transform: skewX(-2deg); opacity: .8; }
+}
+</style>
+
+
+
+<script>
+
+
+var myGamePiece;
+
+
+var myObstacle;
+var myObstacle2;
+var myObstacle4;
+var myObstacle5;
+var myObstacle6;
+var myObstacle7;
+var myObstacle8;
+var myObstacle9;
+var myObstacle10;
+var myObstacle11;
+
+
+
+
+
+
+
+function startGame() {
+    myGamePiece = new component(30, 30, "../imagenes/1.png", 40, 330, "image");
+	myObstacle  = new component(220, 30, "green", 0, 220);
+	 myObstacle2  = new component(115, 10, "blue", 270, 0);
+	 myObstacle4  = new component(60, 75, "orange", 160, 220);
+ myObstacle5  = new component(20, 290, "green", 300, 80);
+  myObstacle6  = new component(15, 300, "yellow", 0, 10);
+  myObstacle7  = new component(40, 75, "purple", 75, 300);
+  myObstacle8  = new component(60, 80, "black", 95, 70);
+  myObstacle9  = new component(190, 15, "blue", 130, 160);
+  myObstacle10  = new component(240, 25, "grey", 0, 0);
+  myObstacle11  = new component(90, 15, "blue", 250, 0);
+	
+   
+	
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 319;
+        this.canvas.height = 361;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+}
+function everyinterval(n) {
+  if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+  return false;
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (type == "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+		}
+	}
+			this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+			}
+	
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+        
+    
+    
+function updateGameArea() {
+	
+	
+    if (myGamePiece.crashWith(myObstacle)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+        myObstacle.update();
+		
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		 if (myGamePiece.crashWith(myObstacle2)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle2.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	
+
+		
+		if (myGamePiece.crashWith(myObstacle4)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle4.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle5)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+       
+		myObstacle5.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle6)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+       
+		myObstacle6.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle7)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle7.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle8)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+     
+		myObstacle8.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+	if (myGamePiece.crashWith(myObstacle9)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle9.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle10)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy facil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle10.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle11)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 15.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle11.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+
+	}
+}
+}
+}
+}
+}
+}
+}
+}
+
+
+  
+}
+
+
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+
+}
+</script>
+
+
+<div style="text-align:center;width:480px;">
+  <button onmousedown="moveup()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveup()">UP</button><br><br>
+  <button onmousedown="moveleft()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveleft()">LEFT</button>
+  <button onmousedown="moveright()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveright()">RIGHT</button><br><br>
+  <button onmousedown="movedown()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="movedown()">DOWN</button>
+</div>
+
+<p>The component constructor uses the built-in image object to draw images onto the canvas.</p>
+
+</body>
