@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+</head>
+<div>
+<span>Total elapsed time: <span id="elapsedTime"></span></span>
+
+</div>
+<script>
+var timeStamp = Date.now(),
+		sessionStamp = sessionStorage.getItem('ts'),
+    elapsedTime;
+if (!sessionStamp) {
+	sessionStorage.setItem('ts', timeStamp.toString());
+  sessionStamp = timeStamp;
+}
+else {
+  sessionStamp = parseInt(sessionStamp);
+}
+
+function increment() {
+	elapsedTime = Date.now() - sessionStamp;
+  document.getElementById('elapsedTime').textContent = Math.round(elapsedTime / 1000).toString();
+}
+
+setInterval(increment, 1000);
+</script>
+</body>
+</html>
