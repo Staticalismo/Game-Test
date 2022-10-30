@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://jsfiddle.net/cs00L0ok/embedded/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta http-equiv="edit-Type" edit="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JSFiddle</title>
+
+      <meta name="robots" content="index, follow">
+      <meta name="googlebot" content="index, follow">
+
+      <script type="text/javascript">
+        var height
+        var force_height = null
+        var slug = "cs00L0ok"
+        var show_src = "//fiddle.jshell.net/cs00L0ok/show/light/"
+        var resize_element_counter = 0
+        var shell_edit_url = "/cs00L0ok/light/"
+
+      </script>
+
+      <script src="./highlight.pack.js.descarga"></script>
+      <script src="./embed.js.descarga"></script>
+      <link rel="stylesheet" media="screen" href="./embed-light.css">
+
+    <style type="text/css" media="screen">
+    /* */</style>
+
+  <style data-cbh-dummy="dummy" type="text/css">*[data-cbh-blocked]{display:none !important;}
+</style></head>
+  <body>
+    <div id="full-embed">
+        <header>
+          <h1>
+            <a href="https://jsfiddle.net/cs00L0ok/" target="_blank">
+              <svg width="34" height="40">
+      <use xlink:href="//jsfiddle.net/sprite.svg#logo"></use>
+    </svg>Edit in JSFiddle
+            </a>
+          </h1>
+          <div id="actions">
+            <ul class="normalRes">
+                <li class="active">
+                  <a data-trigger-type="js" href="https://jsfiddle.net/cs00L0ok/embedded/#JavaScript">JavaScript</a>
+                </li>
+                <li class="">
+                  <a data-trigger-type="html" href="https://jsfiddle.net/cs00L0ok/embedded/#HTML">HTML</a>
+                </li>
+                <li class="">
+                  <a data-trigger-type="css" href="https://jsfiddle.net/cs00L0ok/embedded/#CSS">CSS</a>
+                </li>
+                <li class="">
+                  <a data-trigger-type="result" href="https://jsfiddle.net/cs00L0ok/embedded/#Result">Result</a>
+                </li>
+            </ul>
+            <div class="hl" style="left: 0px; width: 80.6562px;"></div>
+          </div>
+        </header>
+
+        <div id="tabs">
+              <pre class="tCont JavaScript active hljs">    <span class="hljs-keyword">var</span> svg = d3.select(<span class="hljs-string">"svg"</span>),
+        width = +svg.attr(<span class="hljs-string">"width"</span>),
+        height = +svg.attr(<span class="hljs-string">"height"</span>);
+
+    <span class="hljs-keyword">var</span> radius = <span class="hljs-number">5</span>;
+    <span class="hljs-comment">// generate first 3 point</span>
+    <span class="hljs-keyword">var</span> circle_data = d3.range(<span class="hljs-number">3</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">x</span>: <span class="hljs-built_in">Math</span>.round(<span class="hljs-built_in">Math</span>.random() * (width - radius * <span class="hljs-number">2</span> ) + radius),
+            <span class="hljs-attr">y</span>: <span class="hljs-built_in">Math</span>.round(<span class="hljs-built_in">Math</span>.random() * (height - radius * <span class="hljs-number">2</span> ) + radius)
+        };
+    });
+
+    <span class="hljs-comment">//define my line generator</span>
+    <span class="hljs-keyword">var</span> bezierLine = d3.line()
+        .x(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <span class="hljs-keyword">return</span> d.x;
+        })
+        .y(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <span class="hljs-keyword">return</span> d.y;
+        }).curve(d3.curveCardinal);
+
+
+    d3.select(<span class="hljs-string">"svg"</span>).append(<span class="hljs-string">"path"</span>)
+        .attr(<span class="hljs-string">"stroke"</span>, <span class="hljs-string">"blue"</span>)
+        .attr(<span class="hljs-string">"stroke-linecap"</span>, <span class="hljs-string">"round"</span>)
+        .attr(<span class="hljs-string">"stroke-width"</span>, <span class="hljs-number">5</span>)
+        .attr(<span class="hljs-string">"fill"</span>, <span class="hljs-string">"none"</span>)
+        .attr(<span class="hljs-string">"d"</span>, bezierLine(circle_data)).transition()
+        .duration(<span class="hljs-number">2000</span>)
+        .attrTween(<span class="hljs-string">"stroke-dasharray"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> len = <span class="hljs-keyword">this</span>.getTotalLength();
+            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">t</span>) </span>{
+                <span class="hljs-keyword">return</span> (d3.interpolateString(<span class="hljs-string">"0,"</span> + len, len + <span class="hljs-string">",0"</span>))(t)
+            };
+        });
+		<span class="hljs-comment">// add circle</span>
+    <span class="hljs-keyword">var</span> circles = d3.select(<span class="hljs-string">"svg"</span>)
+        .append(<span class="hljs-string">"g"</span>)
+        .attr(<span class="hljs-string">"class"</span>, <span class="hljs-string">"circles"</span>)
+        .selectAll(<span class="hljs-string">"circle"</span>)
+        .data(circle_data)
+        .enter()
+        .append(<span class="hljs-string">"circle"</span>)
+        .attr(<span class="hljs-string">"cx"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <span class="hljs-keyword">return</span> (d.x)
+        })
+        .attr(<span class="hljs-string">"cy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <span class="hljs-keyword">return</span> (d.y)
+        })
+        .attr(<span class="hljs-string">"r"</span>, radius)
+        .attr(<span class="hljs-string">"fill"</span>,d3.interpolateRainbow(<span class="hljs-built_in">Math</span>.random()))
+
+    <span class="hljs-keyword">var</span> prevlen = <span class="hljs-number">0</span>;
+
+
+    svg.on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+        <span class="hljs-comment">// add a nex anchor point</span>
+        circle_data.push({
+            <span class="hljs-attr">x</span>: d3.event.x,
+            <span class="hljs-attr">y</span>: d3.event.y
+        });
+        
+        <span class="hljs-comment">// transition the old curve</span>
+        d3.select(<span class="hljs-string">"path"</span>)
+            .each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                <span class="hljs-comment">// get previous length of the path</span>
+                prevlen = <span class="hljs-keyword">this</span>.getTotalLength();
+            })
+            .transition()
+            .duration(<span class="hljs-number">2000</span>)
+            .attr(<span class="hljs-string">"d"</span>, bezierLine(circle_data))
+
+        <span class="hljs-comment">// transition to new point usith strok dasharray trick</span>
+        d3.select(<span class="hljs-string">"path"</span>)
+            .transition()
+            .duration(<span class="hljs-number">2000</span>)
+            .attr(<span class="hljs-string">"d"</span>, bezierLine(circle_data))
+            .attrTween(<span class="hljs-string">"stroke-dasharray"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">var</span> len = <span class="hljs-keyword">this</span>.getTotalLength();
+                <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">t</span>) </span>{
+                    <span class="hljs-keyword">return</span> (d3.interpolateString(prevlen + <span class="hljs-string">" ,"</span> + (len - prevlen), (len+<span class="hljs-number">50</span> )+ <span class="hljs-string">",50"</span>))(t)
+                };
+                
+            });
+        <span class="hljs-comment">// add new point as a circle</span>
+        svg.selectAll(<span class="hljs-string">"circle"</span>)
+            .data(circle_data)
+            .enter()
+            .append(<span class="hljs-string">"circle"</span>)
+            .attr(<span class="hljs-string">"cx"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                <span class="hljs-keyword">return</span> (d.x)
+            })
+            .attr(<span class="hljs-string">"cy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                <span class="hljs-keyword">return</span> (d.y)
+            })
+            .attr(<span class="hljs-string">"r"</span>, radius)
+		        .attr(<span class="hljs-string">"fill"</span>,d3.interpolateRainbow(<span class="hljs-built_in">Math</span>.random()))
+    })</pre>
+              <pre class="tCont HTML hljs"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://d3js.org/d3.v4.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"800"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"500"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></pre>
+              <pre class="tCont CSS hljs">    <span class="hljs-selector-tag">body</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    }</pre>
+              <div class="tCont result " id="result">
+              </div>
+        </div>
+    </div>
+    
+  
+
+</body></html>

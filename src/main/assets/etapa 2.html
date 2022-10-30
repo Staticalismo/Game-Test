@@ -1,0 +1,482 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento sin título</title>
+</head>
+
+<body>
+ <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="./dummy.js.descarga"></script>
+  <script type="text/javascript" src="./jquery-2.1.3.js.descarga"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="./result-light.css">
+
+
+<style id="compiled-css" type="text/css">
+          body {
+        padding: 0;
+        margin: 0;
+    }
+    /* EOS */
+  </style>
+  <style>
+  
+
+
+ 
+	  
+  #field {
+	  
+      width:319px;
+	  height:361px;
+	  top:0px;
+	  left:0px;
+      background-color:#009900;
+      position:absolute;
+      overflow: hidden;
+      cursor: pointer;
+    }
+	
+	
+	
+	
+	
+	
+	 
+    #ball {
+      position:absolute;
+      left:0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      transition: all 1s;
+	  display:block;
+    }
+	
+  </style>
+<style data-cbh-dummy="dummy" type="text/css">*[data-cbh-blocked]{display:none !important;}
+</style></head>
+
+<body style="height:2000px">
+
+
+
+<div id="field"><img src="imagenes/etapa-2b.gif" style="position:relative;opacity:100%" alt="Workplace" usemap="#map" id="alt" width="319" height="361"></div>
+
+<map name="map">
+  <area id="play" shape="rect" coords="-110,0,19,352" title="play" alt="Computer" href="too bad.html">
+  <area id="play3" shape="rect" coords="161,269,267,340" title="play3" alt="Phone" href="too bad.html">
+<area id="play4" shape="rect" coords="199,212,365,347" title="play4" alt="Phone" href="too bad.html">
+<area id="play4" shape="circle" coords="-36,-29,133" title="play4" alt="Phone" href="too bad.html">
+<area id="play4" shape="circle" coords="106,-62,118" title="play4" alt="Phone" href="too bad.html">
+<area id="play4" shape="circle" coords="225,227,85" title="play4" alt="Phone" href="too bad.html">
+<area id="play4" shape="circle" coords="178,228,74" title="play4" alt="Phone" href="too bad.html">
+<area id="play4" shape="circle" coords="167,154,80" title="play4" alt="Phone" href="too bad.html">
+</map>
+    <img src="ball.svg" id="ball" style="left: 70px; top: 330px;" /></div>
+    <a href="mundo.html"><img id="myimage" src="imagenes/1.png" style="position:absolute; display:none; opacity:0%; left:287px; top: 5px; height:36px;" /></a>
+  
+<script> 
+setTimeout(function(){
+    document.getElementById('myimage').style.display = 'block';
+},15000);
+
+</script>
+    
+<script>
+function onloadFunction() {
+  var amount = 1;
+  var arrayIDs = ["myimage"]; 
+   var x = Math.floor(Math.random() + 170);
+    var y = Math.floor(Math.random() * 30);
+
+  for (i=1;i<=amount;i++) {
+
+   var element = document.getElementById(arrayIDs[i-1]);
+   var positionInfo = element.getBoundingClientRect();
+   var imgHeight = positionInfo.height;
+   var imgWidth = positionInfo.width;
+
+
+   var screenWidth =  window.innerWidth;
+   var screenHeight = window.innerHeight;
+
+   var imgLeft = Math.floor(Math.random() * (screenWidth - imgWidth));
+   var imgTop= Math.floor(Math.random() * (screenHeight - imgHeight));
+
+   document.getElementById(arrayIDs[i-1]).style.top = imgTop+ "px";
+   document.getElementById(arrayIDs[i-1]).style.left = imgLeft+"px" ;
+   document.getElementById(arrayIDs[i-1]).style.top = y + 'px';
+   document.getElementById(arrayIDs[i-1]).style.left = x + 'px';       
+  }
+}
+
+onloadFunction();
+</script>
+<style>
+body{
+  background-color: white;
+  font-family: monospace;
+  font-size: 50px;
+}
+
+img {
+  position: absolute;
+}
+</style>    
+<script>
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var end =setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                window.location = "too bad.html";
+                clearInterval(end);
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var fiveMinutes = 300,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
+</script>
+</head>
+<body>
+<div><div style="margin-top:400px; margin-left:80px"><span id="time">05:00</span></div></div>
+<form id="form1" runat="server">
+
+</form>  
+  
+
+  <script>
+    field.onclick = function(event) {
+	
+
+      // Coordenadas del campo relativas a la ventana
+      let fieldCoords = this.getBoundingClientRect();
+      
+
+
+      // El balón tiene position:absolute, el campo: position:relative
+      // por lo que las coordenadas de la bola son relativas a la esquina superior izquierda interna del campo
+      let ballCoords = {
+        top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 1,
+        left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 1
+      };
+
+      // previniendo el cruce del limite superior del campo
+      if (ballCoords.top < 0) ballCoords.top = 0;
+
+      // previniendo el cruce del limite izquierdo del campo
+      if (ballCoords.left < 0) ballCoords.left = 0;
+
+
+      // // previniendo el cruce del limite derecho del campo
+      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+        ballCoords.left = field.clientWidth - ball.clientWidth;
+      }
+
+      // previniendo el cruce del limite inferior del campo
+      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+        ballCoords.top = field.clientHeight - ball.clientHeight;
+      }
+
+      ball.style.left =  ballCoords.left + 'px';
+      ball.style.top =  ballCoords.top + 'px';
+    }
+  </script>
+  
+  <script id="insert"></script>
+
+
+    <script src="./stringify.js.descarga" charset="utf-8"></script>
+    <script>
+      const customConsole = (w) => {
+        const pushToConsole = (payload, type) => {
+          w.parent.postMessage({
+            console: {
+              payload: stringify(payload),
+              type:    type
+            }
+          }, "*")
+        }
+
+        w.onerror = (message, url, line, column) => {
+          // the line needs to correspond with the editor panel
+          // unfortunately this number needs to be altered every time this view is changed
+          line = line - 70
+          if (line < 0){
+            pushToConsole(message, "error")
+          } else {
+            pushToConsole(`[${line}:${column}] ${message}`, "error")
+          }
+        }
+
+        let console = (function(systemConsole){
+          return {
+            log: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "log")
+              systemConsole.log.apply(this, args)
+            },
+            info: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "info")
+              systemConsole.info.apply(this, args)
+            },
+            warn: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "warn")
+              systemConsole.warn.apply(this, args)
+            },
+            error: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "error")
+              systemConsole.error.apply(this, args)
+            },
+            system: function(arg){
+              pushToConsole(arg, "system")
+            },
+            clear: function(){
+              systemConsole.clear.apply(this, {})
+            },
+            time: function(){
+              let args = Array.from(arguments)
+              systemConsole.time.apply(this, args)
+            },
+            assert: function(assertion, label){
+              if (!assertion){
+                pushToConsole(label, "log")
+              }
+
+              let args = Array.from(arguments)
+              systemConsole.assert.apply(this, args)
+            }
+          }
+        }(window.console))
+
+        window.console = { ...window.console, ...console }
+
+        console.system("Running fiddle")
+      }
+
+      if (window.parent){
+        customConsole(window)
+      }
+    </script>
+<style data-cbh-dummy="dummy" type="text/css">*[data-cbh-blocked]{display:none !important;}
+</style></head>
+<body>
+    
+ <div id="content" style="margin-top: 100px"></div>
+
+    <script type="text/javascript">//<![CDATA[
+
+
+$("#lolcat").mousedown(function() {
+    $(this).data("dragging", true);
+});
+
+$("#lolcat").mouseup(function() {
+    $(this).data("dragging", false);
+});
+
+$("#lolcat").mousemove(function(e) {
+    if (!$(this).data("dragging"))
+        return;
+    $(this).css("left", e.clientX - $(this).width()/2);
+    $(this).css("top", e.clientY - $(this).height()/2);
+});
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "djjL16p2"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+
+    <script>
+      let allLines = []
+
+      window.addEventListener("message", (message) => {
+        if (message.data.console){
+          let insert = document.querySelector("#insert")
+          allLines.push(message.data.console.payload)
+          insert.innerHTML = allLines.join(";\r")
+
+          let result = eval.call(null, message.data.console.payload)
+          if (result !== undefined){
+            console.log(result)
+          }
+        }
+      })
+    </script>
+
+
+
+
+
+
+
+    <script type="text/javascript">//<![CDATA[
+
+
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var radius = 5;
+    // generate first 3 point
+    var circle_data = d3.range(1).map(function () {
+        return {
+            x: Math.round(Math.random() * (radius * -300 ) + radius),
+            y: Math.round(Math.random() * (radius * -300 ) + radius)
+        };
+    });
+
+    //define my line generator
+    var bezierLine = d3.line()
+        .x(function (d) {
+            return d.x;
+        })
+        .y(function (d) {
+            return d.y;
+        }).curve(d3.curveCardinal);
+
+
+    d3.select("svg").append("path")
+        .attr("stroke", "blue")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 5)
+        .attr("fill", "none")
+        .attr("d", bezierLine(circle_data)).transition()
+        .duration(2000)
+        .attrTween("stroke-dasharray", function () {
+            var len = this.getTotalLength();
+            return function (t) {
+                return (d3.interpolateString("0," + len, len + ",0"))(t)
+            };
+        });
+		// add circle
+    var circles = d3.select("svg")
+        .append("g")
+        .attr("class", "circles")
+        .selectAll("circle")
+        .data(circle_data)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) {
+            return (d.x)
+        })
+        .attr("cy", function (d) {
+            return (d.y)
+        })
+        .attr("r", radius)
+        .attr("fill",d3.interpolateRainbow(Math.random()))
+
+    var prevlen = 0;
+
+
+    svg.on("click", function (d) {
+        // add a nex anchor point
+        circle_data.push({
+            x: d3.event.x,
+            y: d3.event.y
+        });
+        
+        // transition the old curve
+        d3.select("path")
+            .each(function (d) {
+                // get previous length of the path
+                prevlen = this.getTotalLength();
+            })
+            .transition()
+            .duration(2000)
+            .attr("d", bezierLine(circle_data))
+
+        // transition to new point usith strok dasharray trick
+        d3.select("path")
+            .transition()
+            .duration(2000)
+            .attr("d", bezierLine(circle_data))
+            .attrTween("stroke-dasharray", function () {
+                var len = this.getTotalLength();
+                return function (t) {
+                    return (d3.interpolateString(prevlen + " ," + (len - prevlen), (len+50 )+ ",50"))(t)
+                };
+                
+            });
+        // add new point as a circle
+        svg.selectAll("circle")
+            .data(circle_data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) {
+                return (d.x)
+            })
+            .attr("cy", function (d) {
+                return (d.y)
+            })
+            .attr("r", radius)
+		        .attr("fill",d3.interpolateRainbow(Math.random()))
+    })
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: ""
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+<script>
+      let allLines = []
+
+      window.addEventListener("message", (message) => {
+        if (message.data.console){
+          let insert = document.querySelector("#insert")
+          allLines.push(message.data.console.payload)
+          insert.innerHTML = allLines.join(";\r")
+
+          let result = eval.call(null, message.data.console.payload)
+          if (result !== undefined){
+            console.log(result)
+          }
+        }
+      })
+    </script>
+
+
+</html>

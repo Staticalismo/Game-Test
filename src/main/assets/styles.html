@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+</head>
+<script>
+function coords(dx, dy) {
+  var cx = document.getElementById('block').style.marginLeft;
+  var cy = document.getElementById('block').style.marginTop;
+  cx = parseInt(cx) + 20 * dx;
+  cy = parseInt(cy) + 20 * dy;
+  if (cx < 0) cx = 0;
+  if (cy < 0) cy = 0;
+  if (cx > 380) cx = 380;
+  if (cy > 310) cy = 310;
+  document.getElementById('block').style.marginLeft = cx + 'px';
+  document.getElementById('block').style.marginTop = cy + 'px';
+}
+</script>
+<style>
+.place {
+  border: 3px solid;
+  width: 319px;
+  height: 361px;
+  margin: 1em auto;
+  background-image: linear-gradient(transparent 19px, #888 19px, transparent 20px), linear-gradient(90deg, transparent 19px, #888 19px, transparent 20px);
+  background-size: 20px 20px, 20px 20px;
+  overflow: hidden;
+  position: absolute;
+}
+#block {
+  width: 19px;
+  height: 19px;
+  background-color: red;
+  transition: .2s;
+}
+.buttons {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, .1);
+  margin: 1em auto;
+  border-radius: 90px;
+  position: relative;
+}
+.but0 {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+}
+.but1 {
+  left: 50%;
+  margin-left: -25px;
+}
+.but2 {
+  left: 50%;
+  bottom: 0;
+  margin-left: -25px;
+}
+.but3 {
+  top: 50%;
+  margin-top: -25px;
+}
+.but4 {
+  top: 50%;
+  right: 0;
+  margin-top: -25px;
+}
+</style>
+<div class="place">
+  <div id="block" style="margin-left: 20px; margin-top: 20px;"></div>
+</div>
+<div id="div1"><img src="imagenes/etapa-3.gif" style="position:relative" alt="Workplace" usemap="#map" id="alt" width="319" height="361"></div>
+<div class="buttons">
+  <button class="but0 but1" onclick="coords('0','-1')">up</button>
+  <button class="but0 but2" onclick="coords('0','1')">down</button>
+  <button class="but0 but3" onclick="coords('-1','0')">left</button>
+  <button class="but0 but4" onclick="coords('1','0')">right</button>
+  <script type="text/javascript" src="./jquery-2.1.3.js.descarga">
+  function collision($div1, $div2) {
+      var x1 = $div1.offset().left;
+      var y1 = $div1.offset().top;
+      var h1 = $div1.outerHeight(true);
+      var w1 = $div1.outerWidth(true);
+      var b1 = y1 + h1;
+      var r1 = x1 + w1;
+      var x2 = $block.offset().left;
+      var y2 = $block.offset().top;
+      var h2 = $block.outerHeight(true);
+      var w2 = $block.outerWidth(true);
+      var b2 = y2 + h2;
+      var r2 = x2 + w2;
+        
+      if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+      return true;
+    }
+
+
+window.setInterval(function() {
+    $('#result').text(collision($('#div1'), $('#block')));
+}, 200);
+
+
+$('#div1,#block').scroll();
+
+</script>
+<p align="right">Colliding? <span id="result">false</span>
+<body>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+</head>
+
+
+
+
+<body>
+<body bgcolor="#FF9933">
+<div align="center"><font face="Georgia, Times New Roman, Times, serif"; size="+16" color="#FFFFFF">¡¡LO HAS HECHO!! IMPRESIONANTE. Has terminado el juego, ahora puedes ver la galeria de imagenes</font></div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 200px;
+  height: 100px;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
+<body>
+
+
+
+<div class="container">
+  <div class="mySlides">
+    <div class="numbertext">1 / 10</div>
+    <img src="imagenes/38ad373043fa1f63acc570b62e22cc7f-paisaje-natural.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 10</div>
+    <img src="imagenes/carretera-fangosa-curvas-bosque-oscuro-rodeado-vegetacion-pequena-luz-que-viene-arriba_181624-1825.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 10</div>
+    <img src="imagenes/Fotos-de-paisajes-1024x683.jpg" style="width:100%">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">4 / 10</div>
+    <img src="imagenes/paisajes-expresivos-734x489-1.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 10</div>
+    <img src="imagenes/plitvice-lakes-1-1.jpg" style="width:100%">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">6 / 10</div>
+    <img src="imagenes/nature-3398301_1920-e1526403904634.jpg" style="width:100%">
+  </div>
+  
+   <div class="mySlides">
+    <div class="numbertext">7 / 10</div>
+    <img src="imagenes/arrecife-belice-1-1.jpg" style="width:100%">
+  </div>
+  
+    <div class="mySlides">
+    <div class="numbertext">8 / 10</div>
+    <img src="imagenes/desierto2-e1537800205712.jpg" style="width:100%">
+  </div>
+  
+    <div class="mySlides">
+    <div class="numbertext">9 / 10</div>
+    <img src="imagenes/paisaje-nitido-cascada-1462x2193.jpg" style="width:100%">
+  </div>
+  
+    <div class="mySlides">
+    <div class="numbertext">10 / 10</div>
+    <img src="imagenes/paisajes-hermosos.jpg" style="width:100%">
+  </div>
+    
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <div class="row">
+    <div class="column">
+       <a href="imagenes/38ad373043fa1f63acc570b62e22cc7f-paisaje-natural.jpg" download><img class="demo cursor" src="imagenes/38ad373043fa1f63acc570b62e22cc7f-paisaje-natural.jpg" style="width:100%" onclick="currentSlide(1)" alt="Paisaje 1"></a>
+    </div>
+    <div class="column">
+       <a href="imagenes/carretera-fangosa-curvas-bosque-oscuro-rodeado-vegetacion-pequena-luz-que-viene-arriba_181624-1825.jpg" download><img class="demo cursor" src="imagenes/carretera-fangosa-curvas-bosque-oscuro-rodeado-vegetacion-pequena-luz-que-viene-arriba_181624-1825.jpg" style="width:100%" onclick="currentSlide(2)" alt="Paisaje 2"></a>
+    </div>
+    <div class="column">
+       <a href="imagenes/Fotos-de-paisajes-1024x683.jpg" download><img class="demo cursor" src="imagenes/Fotos-de-paisajes-1024x683.jpg" style="width:100%" onclick="currentSlide(3)" alt="Paisaje 3"></a>
+    </div>
+    <div class="column">
+       <a href="imagenes/paisajes-expresivos-734x489-1.jpg" download><img class="demo cursor" src="imagenes/paisajes-expresivos-734x489-1.jpg" style="width:100%" onclick="currentSlide(4)" alt="Paisaje 4"></a>
+    </div>
+    <div class="column">
+       <a href="imagenes/plitvice-lakes-1-1.jpg" download><img class="demo cursor" src="imagenes/plitvice-lakes-1-1.jpg" style="width:100%" onclick="currentSlide(5)" alt="Paisaje 5"></a>
+    </div>    
+    <div class="column">
+      <a href="imagenes/nature-3398301_1920-e1526403904634.jpg" download><img class="demo cursor" src="imagenes/nature-3398301_1920-e1526403904634.jpg" style="width:100%" onclick="currentSlide(6)" alt="Paisaje 6"></a> 
+    </div>
+    <div class="column">
+      <a href="imagenes/arrecife-belice-1-1.jpg" download><img class="demo cursor" src="imagenes/arrecife-belice-1-1.jpg" style="width:100%" onclick="currentSlide(7)" alt="Paisaje 7"></a> 
+    </div>
+    <div class="column">
+      <a href="imagenes/desierto2-e1537800205712.jpg" download><img class="demo cursor" src="imagenes/desierto2-e1537800205712.jpg" style="width:100%" onclick="currentSlide(8)" alt="Paisaje 8"></a> 
+    </div>
+    <div class="column">
+      <a href="imagenes/paisaje-nitido-cascada-1462x2193.jpg" download><img class="demo cursor" src="imagenes/paisaje-nitido-cascada-1462x2193.jpg" style="width:100%; height:120px;" onclick="currentSlide(9)" alt="Paisaje 9"></a> 
+    </div>
+    <div class="column">
+      <a href="imagenes/paisajes-hermosos.jpg" download><img class="demo cursor" src="imagenes/paisajes-hermosos.jpg" style="width:100%" onclick="currentSlide(10)" alt="Paisaje 10"></a> 
+    </div>
+  </div>
+</div>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("demo");
+  let captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+
+</body>
+</html>
