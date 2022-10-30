@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+	position:absolute;
+}
+</style>
+</head>
+<body onload="startGame()">
+<img id="myImg" src="../imagenes/etapa-15.gif" alt="The Pulpit Rock" width="319" height="361" style="position:relative; opacity:100%">
+
+<script>
+
+
+var myGamePiece;
+var myObstacle;
+var myObstacle2;
+var myObstacle3;
+var myObstacle4;
+var myObstacle5;
+var myObstacle6;
+var myObstacle7;
+var myObstacle8;
+var myObstacle9;
+var myObstacle10;
+var myObstacle11;
+var myObstacle12;
+var myObstacle13;
+var myObstacle14;
+
+
+
+
+var myObstacleA;
+var myObstacleB;
+var myObstacleC;
+var myObstacleD;
+var myObstacleE;
+var myObstacleF;
+
+
+
+
+
+function startGame() {
+    myGamePiece = new component(20, 20, "../imagenes/1.png", 80, 260, "image");
+myObstacle  = new component(25, 25, "purple", 30, 230);
+ myObstacle2  = new component(115, 10, "blue", 270, 0);
+myObstacle3  = new component(10, 130, "cyan", 210, 230);
+ myObstacle4  = new component(95, 35, "orange", 120, 155);
+
+ myObstacle5  = new component(90, 20, "green", 0, 290);
+  myObstacle6  = new component(10, 110, "yellow", 160, 200);
+  myObstacle7  = new component(20, 95, "purple", 95, 150);
+  myObstacle8  = new component(100, 20, "black", 105, 90);
+  myObstacle9  = new component(10, 140, "blue", 270, 170);
+   myObstacle10  = new component(200, 5, "grey", 0, 40);
+   myObstacle11  = new component(10, 40, "blue", 0, 5);
+    myObstacle12  = new component(20, 90, "blue", 30, 110);
+	 myObstacle13  = new component(140, 10, "blue", 200, 130);
+	 myObstacle14  = new component(20, 90, "orange", 240, 0);
+    
+  
+
+ myObstacleA  = new component(50, 40, "red", 50, 115);
+ myObstacleB  = new component(60, 10, "red", 90, 290);
+  myObstacleC  = new component(50, 40, "red", 120, 5);
+  myObstacleD  = new component(20, 20, "blue", 40, 80);
+   myObstacleE  = new component(20, 20, "blue", 170, 130);
+   myObstacleF  = new component(20, 20, "blue", 130, 200);
+ 
+ 
+ 
+
+ 
+	
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 319;
+        this.canvas.height = 361;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (type == "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+		}
+	}
+			this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+			}
+	
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+        
+    
+    
+function updateGameArea() {
+	
+	 if (myGamePiece.crashWith(myObstacle)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+  
+		
+		 if (myGamePiece.crashWith(myObstacle2)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 8.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle2.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	
+ if (myGamePiece.crashWith(myObstacle3)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle3.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle4)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+      
+		myObstacle4.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle5)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+       
+		myObstacle5.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle6)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+       
+		myObstacle6.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle7)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle7.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle8)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+     
+		myObstacle8.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+	if (myGamePiece.crashWith(myObstacle9)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle9.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle10)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle10.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle11)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 5.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle11.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle12)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle12.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle13)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle13.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacle14)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacle14.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+	if (myGamePiece.crashWith(myObstacleA)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleA.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+if (myGamePiece.crashWith(myObstacleB)) {
+		
+        myGameArea.stop();
+		document.location.href = "too bad muy dificil.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleB.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacleC)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 11.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleC.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacleD)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 15b.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleD.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacleE)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 15c.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleE.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+		
+		if (myGamePiece.crashWith(myObstacleF)) {
+		
+        myGameArea.stop();
+		document.location.href = "stage 15d.html";
+    } else {
+        myGameArea.clear();
+        
+		myObstacleF.update();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+	}
+	}
+	}
+	}
+	}
+	}
+	}
+	}
+	}
+}
+}
+}
+}
+}
+}
+	}
+	}
+	}
+	}
+	}
+}
+
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+
+</script>
+
+
+<div style="text-align:center;width:480px;">
+  <button onmousedown="moveup()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveup()">UP</button><br><br>
+  <button onmousedown="moveleft()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveleft()">LEFT</button>
+  <button onmousedown="moveright()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="moveright()">RIGHT</button><br><br>
+  <button onmousedown="movedown()" onmouseup="clearmove()" style="font-size:32px" ontouchstart="movedown()">DOWN</button>
+</div>
+
+<p>The component constructor uses the built-in image object to draw images onto the canvas.</p>
+
+</body>
